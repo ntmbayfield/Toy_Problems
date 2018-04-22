@@ -1,0 +1,20 @@
+PROBLEM:   You get an array of numbers, return the sum of all of the positives ones.
+           Example [1,-4,7,12] => 1 + 7 + 12 = 20
+           Note: array may be empty, in this case return 0.
+           
+SOLUTION:
+
+function positiveSum(arr) {
+  let filteredArr = [];  //create filteredArr variable and assign it a value of an empty array
+  
+  
+  if (arr.length === 0) {  //check to see if arr is an empty array, by checking if its length is equal to zero
+    return 0;              //if the length of arr is equal to zero, then return zero
+  
+  } else {                 //use .filter to remove any negative numbers from arr, then use .reduce to add the remaining indexes of arr together
+      filteredArr = arr.filter(value => value >=0).reduce((accumulator, currentValue)=> accumulator + currentValue, 0);  //need to specify an initial value of 0, when calling .reduce because it will throw an error if you pass it an empty array without an inital value
+  }
+  return filteredArr;      //return filteredArr variable that has a value equal to the sum of only the positive integers that were in the initial arr array
+  
+}
+
