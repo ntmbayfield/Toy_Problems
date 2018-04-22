@@ -1,0 +1,29 @@
+PROBLEM:
+You are going to be given a word. Your job is to return the middle character of the word. If the word's length is odd, return the middle character. If the word's length is even, return the middle 2 characters.
+
+Examples:  Kata.getMiddle("test") should return "es"
+            Kata.getMiddle("testing") should return "t"
+            Kata.getMiddle("middle") should return "dd"
+            Kata.getMiddle("A") should return "A"
+Input:  A word (string) of length 0 < str < 1000 (In javascript you may get slightly more than 1000 in some test cases due to an error in the test cases). You do not need to test for this. This is only here to tell you that you do not need to worry about your solution timing out.
+
+Output: The middle character(s) of the word represented as a string.
+
+SOLUTION:
+function getMiddle(s){
+
+//determine if the length of the string is an odd or even number.  
+  //if the string's length is even then will need to return 2 characters.
+  if (s.length % 2===0) {  
+    let dividePoint = s.length/2;  
+    let middleChars= s[dividePoint -1].concat(s[dividePoint]);
+    return middleChars;
+
+  // if the string's length is an odd number then will only need to return a single character   
+  } else {  
+    let midIndex = Math.floor(s.length/2);  //If you divide an odd number by two, the result will always end in "digit.5"
+                                            //You then want to round down to the nearest integer using Math.round()
+                                            //
+    return s[midIndex];
+    }
+}
