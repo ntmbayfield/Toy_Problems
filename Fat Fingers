@@ -1,0 +1,128 @@
+PROBLEM:
+Freddy has a really fat left pinky finger, and every time Freddy tries to type an A, he accidentally hits the CapsLock key!
+
+Given a string that Freddy wants to type, emulate the keyboard misses where each A supposedly pressed is replaced with CapsLock, and return the string that Freddy actually types. It doesn't matter if the A in the string is capitalized or not. When CapsLock is enabled, capitalization is reversed, but punctuation is not affected.
+
+Examples:
+
+"The quick brown fox jumps over the lazy dog."
+-> "The quick brown fox jumps over the lZY DOG."
+
+"The end of the institution, maintenance, and administration of government, is to secure the existence of the body politic, to protect it, and to furnish the individuals who compose it with the power of enjoying in safety and tranquillity their natural rights, and the blessings of life: and whenever these great objects are not obtained, the people have a right to alter the government, and to take measures necessary for their safety, prosperity and happiness."
+-> "The end of the institution, mINTENnce, ND dministrTION OF GOVERNMENT, IS TO SECURE THE EXISTENCE OF THE BODY POLITIC, TO PROTECT IT, nd to furnish the individuLS WHO COMPOSE IT WITH THE POWER OF ENJOYING IN Sfety ND TRnquillity their nTURl rights, ND THE BLESSINGS OF LIFE: nd whenever these greT OBJECTS re not obtINED, THE PEOPLE Hve  RIGHT TO lter the government, ND TO Tke meSURES NECESSry for their sFETY, PROSPERITY nd hPPINESS."
+
+"aAaaaaAaaaAAaAa"
+-> ""
+If the given string is null, return null.
+
+If the given string is "", the answer should be evident.
+
+Happy coding!
+
+(Adapted from https://codegolf.stackexchange.com/questions/158132/no-a-just-caps-lock)
+
+
+
+
+SOLUTION:
+var fatFingers = function(str) {
+
+  //create function to check the following conditions:
+    //str===null
+    //str===undefined 
+    //str===""  
+    //str.includes
+ console.log(str);   
+
+  if (str==null) {
+    return null;
+  } else if (str === "") {
+    return "";
+  } else if (str.includes("a")===-1 && str.includes("A")===-1) {
+    return str;
+  } else {  
+  //create function that will see if the specified letter is in the string
+  //if string.includes(letter)===false, then it should return the original string
+  //else if string.includes(letter)===true, then it should find the first index in the string that has a value of letter and use .splice to remove index[0]-index[firstIndexOfLetter] from str and assign the removed indexes of str in a new variable called removed
+  let aCounter = 0;
+  let firstAInStr;
+  
+  for (let n=0; n<str.length; n++) {
+    if (str[n]!=="a" && str[n]!=="A") {
+      aCounter = aCounter + 1;
+    }else {
+      firstAInStr = aCounter;
+      console.log("first occurence of a/A is at index " + firstAInStr + " of str");
+      break;
+    }
+  }
+  
+  let strBeforeFirstA = str.slice(0, firstAInStr);
+  strBeforeFirstA = strBeforeFirstA.replace(",", "*");
+  console.log(strBeforeFirstA);
+  let capsLockArray = [];
+  
+  //create a counter variable and set it to zero; each time we find the letter "a" in the remaining portion of the   original string; increment the counter variablke by +1;
+  
+  //create a new array of the indexes in the string that came before "a" that were removed with .splice().  Will use .concat method later in this code to add the capsLockArray onto the end of this array
+  
+// str = str.replace(",", "*");
+// str = str.replace(" ","-");
+// console.log("string with commas and whitespaces marked: ", str);
+    
+    
+   
+   
+      //preserve where spaces were in original string by replacing them with underscores
+      
+      str = str.replace(/,/g, "*");
+      str = str.replace(/ /g, "-");
+      console.log("str after replace whitespaces with dashes :", str);
+      
+     
+      
+      let result = "";
+    
+    
+      let capsLockCounter = 0;
+    
+      for (let j = firstAInStr; j < str.length; j++) {
+        if (str[j] === "a" || str[j] ==="A") {
+          capsLockCounter = capsLockCounter + 1;
+        } else if (str[j]==="-") {
+          capsLockArray.push("-");
+        } else if (str[j]==="*") {
+          capsLockArray.push("*");
+        } else if (str[j] !== "a" && str[j]!=="A" && capsLockCounter % 2 !== 0) {
+          capsLockArray.push(str[j].toUpperCase());
+        } else if (str[j] !== "a" && str[j]!=="A" &&capsLockCounter % 2 === 0) {
+          capsLockArray.push(str[j]);
+        } else {
+          return undefined;
+        }
+      }
+      
+      let arrWithCapsAndNoAs = strBeforeFirstA.concat(capsLockArray);
+      console.log("arrWithCapsAndNoAs ", arrWithCapsAndNoAs);
+
+    
+     let resultWithNoCommas = arrWithCapsAndNoAs.split(",");
+     resultWithNoCommas = resultWithNoCommas.join("");
+     console.log("resultWithNoCommas: ", resultWithNoCommas);
+     
+     let filteredString = "";
+     
+     for (let l=0; l< resultWithNoCommas.length; l++) {
+       if (resultWithNoCommas[l]==="*") {
+         filteredString = filteredString.concat(",");
+       } else if (resultWithNoCommas[l]==="-") {
+         filteredString = filteredString.concat(" ");
+       } else {
+         filteredString = filteredString.concat(resultWithNoCommas[l]);
+       }
+      }
+    console.log(filteredString);
+    return filteredString;
+    }
+  
+};
