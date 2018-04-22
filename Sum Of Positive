@@ -2,7 +2,7 @@ PROBLEM:   You get an array of numbers, return the sum of all of the positives o
            Example [1,-4,7,12] => 1 + 7 + 12 = 20
            Note: array may be empty, in this case return 0.
            
-SOLUTION:
+SOLUTION 1:
 
 function positiveSum(arr) {
   let filteredArr = [];  //create filteredArr variable and assign it a value of an empty array
@@ -16,5 +16,17 @@ function positiveSum(arr) {
   }
   return filteredArr;      //return filteredArr variable that has a value equal to the sum of only the positive integers that were in the initial arr array
   
+}
+
+SOLUTION 2:
+
+function positiveSum(arr) {
+ let filteredArr = [];
+  if (arr.length === 0) {
+    return 0;
+  } else {
+      filteredArr = arr.filter(value => value >=0).reduce((accumulator, currentValue)=> accumulator + currentValue, 0);
+  }
+  return filteredArr;
 }
 
