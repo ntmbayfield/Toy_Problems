@@ -1,0 +1,37 @@
+PROBLEM:  Deoxyribonucleic acid (DNA) is a chemical found in the nucleus of cells and carries the "instructions" for the development and functioning of living organisms.
+          If you want to know more http://en.wikipedia.org/wiki/DNA
+
+          In DNA strings, symbols "A" and "T" are complements of each other, as "C" and "G". You have function with one side of the DNA (string, except for Haskell); you need to get the other complementary side. DNA strand is never empty or there is no DNA at all (again, except for Haskell).
+          EX:  DNAStrand ("ATTGC") would return "TAACG"
+               DNAStrand ("GTAT") would return "CATA"
+               
+SOLUTION:
+
+function DNAStrand(dna){
+  let complemDNA = [];  //create new empty array named complemDNA to push complementary symbols of input string to
+  console.log("dna string is", dna);
+  
+  let dnaArray = dna.split("");  //use .split to turn the dna variable from a string to an array
+  console.log("dnaArray is", dnaArray);
+  
+  //use for loop to iterate over indexes in dnaArray, and based on letter stored the index use .push to add its complementary symbol to the complemDNA array
+  for (let i = 0; i <dnaArray.length; i++) {
+    if (dnaArray[i] === "A") {
+      complemDNA.push("T");
+    } else if (dnaArray[i] === "T") {
+      complemDNA.push("A");
+    } else if (dnaArray[i] === "C") {
+      complemDNA.push("G");
+    } else {
+      complemDNA.push("C");
+    }
+  }
+  console.log("complemDNA looks like", complemDNA);
+  
+  //turn complemDNA from an array into a string using .join method
+  let complemDNAStr = complemDNA.join("");
+  console.log("complemDNAStr is", complemDNAStr);
+  
+  //return complementary DNA strand
+  return complemDNAStr;
+}
